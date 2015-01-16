@@ -59,15 +59,15 @@ describe(Contact) do
     end
   end
 
-  # describe("#add_phone") do
-  #   it("adds a new phone number to a contact") do
-  #     test_contact = Contact.new({:name => "Nealy Pearson", :number => "503-777-7777"}).save()
-  #     test_phone = Phone.new({:phone_number => "503-222-2222", :type => "Work"})
-  #     test_contact.add_phone(test_phone)
-  # binding.pry
-  #     expect(test_contact.number_add()).to(eq([test_phone]))
-  #   end
-  # end
+  describe("#add_phone") do
+    it("adds a new phone number to a contact") do
+      test_contact = Contact.new({:name => "Nealy Pearson", :number => "503-777-7777"}).save()
+      test_phone = Phone.new({:phone_number => "503-222-2222", :type => "Work"})
+      test_contact.add_phone(test_phone)
+  binding.pry
+      expect(test_contact.number_add()).to(eq([test_phone]))
+    end
+  end
 end
 
 # describe(Phone) do

@@ -41,12 +41,12 @@ end
 
 class Phone
 
-  attr_reader(:phone_number, :type, :uid)
+  attr_reader(:new_number, :type, :uid)
 
   @@numbers_master = []
 
   define_method(:initialize) do |attributes|
-    @phone_number = attributes.fetch(:phone_number)
+    @new_number = attributes.fetch(:new_number)
     @type = attributes.fetch(:type)
     @uid = @@numbers_master.length() + 1
   end
