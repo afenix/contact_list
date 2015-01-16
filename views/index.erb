@@ -1,0 +1,20 @@
+<h1>Personal Contact List</h1>
+
+<h3>Add your contact here:</h3>
+
+<form action="/contacts" method="post">
+  <label for='name'>Contacts's name:</label>
+  <input id='name' name='name' type='text'>
+  <button type="submit">Add Contact</button>
+
+  <label for='number'>Contacts's number:</label>
+  <input id='number' name='number' type='text'>
+  <button type="submit">Add Number</button>
+</form>
+
+
+<ul>
+  <% @contacts.each() do |contact| %>
+  <li><a href="/contacts/<%= contact.uid() %>"><%= contact.name() %></a></li>
+  <% end %>
+</ul>
