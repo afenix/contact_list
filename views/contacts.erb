@@ -1,0 +1,23 @@
+<h1>Add additional phone numbers for <%= @contact.name() %> </h1>
+
+<form action="/contacts" method="post">
+  <input id='uid' name='uid' type='hidden' value='<%= @phone.uid() %>'>
+
+  <label for='new_number'>Contact's new number:</label>
+  <input id='new_number' name='new_number' type='text'>
+
+  <label for='type'>Please include what type of number this is (eg. Work, Home, Other):</label>
+  <input id='type' name='type' type='text'>
+
+  <button type="submit">Add new number</button>
+</form>
+
+<h3>Here are all the numbers for this contact:</h3>
+
+<ul>
+  <% @contacts.number_add().each() do |contact| %>
+  <li><a href="/new_number/<%= contacts.uid() %>"><%= phone.new_number() %> <%= phone.type() %> %></a></li>
+  <% end %>
+</ul>
+
+<<a href="/">Return to Main Page</a>
