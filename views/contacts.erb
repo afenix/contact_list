@@ -1,7 +1,7 @@
 <h1>Add additional phone numbers for <%= @contact.name() %> </h1>
 
 <form action="/contacts" method="post">
-  <input id='uid' name='uid' type='hidden' value='<%= @phone.uid() %>'>
+  <input id='uid' name='uid' type='hidden' value='<%= @phone.contact_id() %>'>
 
   <label for='new_number'>Contact's new number:</label>
   <input id='new_number' name='new_number' type='text'>

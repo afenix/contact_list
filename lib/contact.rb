@@ -41,29 +41,4 @@ class Contact
   define_method(:add_phone) do |new_number|
     @number_add.push(new_number)
   end
-
-  # define_method(:add_type) do |type|
-  #   @number_add.push(new_number, type)
-  # end
-end
-
-class Phone
-
-  attr_reader(:new_number, :type, :uid)
-
-  @@numbers_master = []
-
-  define_method(:initialize) do |attributes|
-    @new_number = attributes.fetch(:new_number)
-    @type = attributes.fetch(:type)
-    @uid = @@numbers_master.length() + 1
-  end
-
-  define_singleton_method(:all) do
-    @@numbers_master
-  end
-
-  define_singleton_method(:clear) do
-    @@numbers_master = []
-  end
 end

@@ -62,30 +62,9 @@ describe(Contact) do
   describe("#add_phone") do
     it("adds a new phone number to a contact") do
       test_contact = Contact.new({:name => "Nealy Pearson", :number => "503-777-7777"}).save()
-      test_phone = Phone.new({:new_number => "503-222-2222", :type => "Work"})
+      test_phone = Phone.new({:phone_number => "503-222-2222", :type => "Work", :contact_id => 1})
       test_contact.add_phone(test_phone)
       expect(test_contact.number_add()).to(eq([test_phone]))
     end
   end
 end
-
-# describe(Phone) do
-#
-#     before() do
-#       Phone.clear()
-#     end
-#
-#     describe(".all") do
-#       it("at first is empty") do
-#         expect(Phone.all()).to(eq([]))
-#       end
-#     end
-#
-#     describe(".clear") do
-#       it("it clears the phone array") do
-#         test_clear = Phone.new({:phone_number => "503-222-2222", :type => "Work"}).save()
-#         Phone.clear()
-#         expect(Phone.all).to(eq([]))
-#       end
-#     end
-# end
