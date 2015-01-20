@@ -50,4 +50,15 @@ describe(Contact) do
     end
   end
 
+  describe(".find") do
+    it("will return the contact when searched for") do
+      test_digits = Phone.new({:cell => "503-222-2222", :work => "503-876-1234", :pager => "800-111-1234"})
+      test_contact = Contact.new({:name => "Nealy Pearson", :phone_numbers => test_digits}).save()
+      test_digits2 = Phone.new({:cell => "503-111-1111", :work => "503-234-1234", :pager => "800-777-8765"})
+      test_contact2 = Contact.new({:name => "Beverly Hills", :phone_numbers => test_digits2}).save()
+      test_digits3 = Phone.new({:cell => "503-333-3333", :work => "503-234-7777", :pager => "866-222-4567"})
+      test_contact3 = Contact.new({:name => "Houdini", :phone_numbers => test_digits3}).save()
+      expect(Contact.find("Nealy Pearson")).to(eq(test_contact))
+    end
+  end
 end

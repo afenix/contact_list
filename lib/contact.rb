@@ -22,10 +22,10 @@ class Contact
     self
   end
 
-  define_singleton_method(:search) do |uid|
+  define_singleton_method(:find) do |contact_name|
     found_contact = nil
     @@all_contacts.each() do |contact|
-      if contact.uid() == uid
+      if contact.name() == contact_name
         found_contact = contact
       end
     end
