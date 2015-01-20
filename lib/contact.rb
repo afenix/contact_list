@@ -1,44 +1,34 @@
 class Contact
 
-  attr_reader(:name, :number, :uid)
+  attr_reader(:name, :phone_numbers)
 
-  @@contacts_master = []
+  @@all_contacts = []
 
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
-    @number = attributes.fetch(:number)
-    @uid = @@contacts_master.length() + 1
-    @number_add = []
+    @phone_numbers = attributes.fetch(:phone_numbers)
   end
 
   define_singleton_method(:all) do
-    @@contacts_master
+    @@all_contacts
   end
 
   define_singleton_method(:clear) do
-    @@contacts_master = []
+    @@all_contacts = []
   end
 
   define_method(:save) do
-    @@contacts_master.push(self)
+    @@all_contacts.push(self)
     self
   end
 
   define_singleton_method(:search) do |uid|
     found_contact = nil
-    @@contacts_master.each() do |contact|
+    @@all_contacts.each() do |contact|
       if contact.uid() == uid
         found_contact = contact
       end
     end
     found_contact
-  end
-
-  define_method(:number_add) do
-    @number_add
-  end
-
-  define_method(:add_phone) do |new_number|
-    @number_add.push(new_number)
   end
 end

@@ -8,17 +8,19 @@ describe(Contact) do
     Contact.clear()
   end
 
-  describe("#contact") do
+  describe("#name") do
     it("returns the name of the contact") do
-      test_name = Contact.new({:name => "Nealy Pearson", :number => 503-777-7777})
-      expect(test_name.name()).to(eq("Nealy Pearson"))
+      test_digits = Phone.new({:cell => "503-222-2222", :work => "503-876-1234", :pager => "800-111-1234"})
+      test_contact = Contact.new({:name => "Nealy Pearson", :phone_numbers => test_digits})
+      expect(test_contact.name()).to(eq("Nealy Pearson"))
     end
   end
 
-  describe("#number") do
-    it("returns the number of the contact") do
-      test_number = Contact.new({:name => "Nealy Pearson", :number => 503-777-7777})
-      expect(test_number.number()).to(eq(503-777-7777))
+  describe("#phone_numbers") do
+    it("returns the phone numbers of the contact") do
+      test_digits = Phone.new({:cell => "503-222-2222", :work => "503-876-1234", :pager => "800-111-1234"})
+      test_contact = Contact.new({:name => "Nealy Pearson", :phone_numbers => test_digits})
+      expect(test_contact.phone_numbers()).to(eq(test_digits))
     end
   end
 
@@ -30,41 +32,22 @@ describe(Contact) do
 
   describe("#save") do
     it("saves the object to the entry") do
-      test_save = Contact.new({:name => "Nealy Pearson", :number => "503-777-7777"})
-      test_save.save()
-      expect(Contact.all()).to(eq([test_save]))
-    end
-  end
-
-  describe("#uid") do
-    it("assigns a numeric id") do
-      test_id = Contact.new({:name => "Van Halen", :number => "503-333-3333"}).save()
-      expect(test_id.uid()).to(eq(1))
+      test_digits = Phone.new({:cell => "503-222-2222", :work => "503-876-1234", :pager => "800-111-1234"})
+      test_contact = Contact.new({:name => "Nealy Pearson", :phone_numbers => test_digits})
+      test_contact.save()
+      expect(Contact.all()).to(eq([test_contact]))
     end
   end
 
   describe(".clear") do
-    it("it clears the contacts array") do
-      test_clear = Contact.new({:name => "Van Halen", :number => "503-333-3333"}).save()
+    it("clears the contacts array") do
+      test_digits = Phone.new({:cell => "503-222-2222", :work => "503-876-1234", :pager => "800-111-1234"})
+      test_contact = Contact.new({:name => "Nealy Pearson", :phone_numbers => test_digits})
+      test_digits2 = Phone.new({:cell => "503-111-1111", :work => "503-234-1234", :pager => "800-777-8765"})
+      test_contact2 = Contact.new({:name => "Beverly Hills", :phone_numbers => test_digits2})
       Contact.clear()
       expect(Contact.all).to(eq([]))
     end
   end
 
-  describe(".find") do
-    it("returns the object from the master when searched for") do
-      test_find1 = Contact.new({:name => "Nealy Pearson", :number => "503-777-7777"}).save()
-      test_find2 = Contact.new({:name => "Kaia Papaya", :number => "888-888-8888"}).save()
-      expect(Contact.search(test_find1.uid())).to(eq(test_find1))
-    end
-  end
-
-  describe("#add_phone") do
-    it("adds a new phone number to a contact") do
-      test_contact = Contact.new({:name => "Nealy Pearson", :number => "503-777-7777"}).save()
-      test_phone = Phone.new({:phone_number => "503-222-2222", :type => "Work", :contact_id => 1})
-      test_contact.add_phone(test_phone)
-      expect(test_contact.number_add()).to(eq([test_phone]))
-    end
-  end
 end
