@@ -31,4 +31,12 @@ class Contact
     end
     found_contact
   end
+
+  define_singleton_method(:get_this) do
+    @@transporter
+  end
+
+  define_singleton_method(:set_this) do |transporter|
+    @@transporter = transporter
+  end
 end

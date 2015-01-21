@@ -3,38 +3,54 @@ require('sinatra')
 require('sinatra/reloader')
 also_reload('./lib/**/*.rb')
 require('./lib/contact')
+require('./lib/phone')
 
 get('/') do
   @contacts = Contact.all()
   erb(:index)
 end
 
-post('/contacts') do
+post('/form1') do
   @name = params.fetch('name')
-  @number = params.fetch('number')
-  Contact.new({:name => @name, :number => @number}).save()
+  @cell = params.fetch('cell')
+  @work = params.fetch('work')
+  @pager = params.fetch('pager')
+  @new_phone = Phone.new({:cell => @cell, :work => @work, :pager => @pager})
+  @new_contact = Contact.new({:name => @name, :phone_numbers => @new_phone}).save()
   @contacts = Contact.all()
   erb(:index)
 end
 
-post('/new_numbers') do
-  @new_number = params.fetch('new_number')
-  @type = params.fetch('type')
-  @new_number = Phone.new({:new_number => @new_number, :type => @type, :contact_id => @contact_id}).save()
-  @contact = Contact.search(params.fetch('uid').to_i())
-  @contact.add_phone(@new_number)
-binding.pry
-  @contacts = Contact.all()
-  @new_numbers = Phone.all()
+get("/contact/:name") do
+  found_contact = Contact.find(params.fetch("name"))
+  @name = found_contact.name()
   erb(:contact)
 end
 
-get('/new_numbers/:contact_id') do
-  @phone_number = Phone.find(params.fetch('contact_id').to_i())
-  erb(:new_number)
+
+post("/add_cell") do
+  cell = params.fetch("new_cell")
+  name = Contact.get_this()
+
+  Contact.find(name).phone_numbers().add_cell(cell)
+
+  redirect("/")
 end
 
-get('/contacts/:uid') do
-  @contact = Contact.search(params.fetch('uid').to_i())
-  erb(:contact)
+post("/add_work") do
+  cell = params.fetch("new_work")
+  name = Contact.get_this()
+
+  Contact.find(name).phone_numbers().add_work(cell)
+
+  redirect("/")
+end
+
+post("/add_pager") do
+  cell = params.fetch("new_pager")
+  name = Contact.get_this()
+
+  Contact.find(name).phone_numbers().add_pager(cell)
+
+  redirect("/")
 end

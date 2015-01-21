@@ -1,19 +1,29 @@
-<h1>Your very own Contact List</h1>
+<div class = "col-md-6">
 
-<h3>Add your contact here:</h3>
+<h4>Add your contact here:</h4>
 
-<form action="/contacts" method="post">
-  <label for='name'>Contacts's name:</label>
-  <input id='name' name='name' type='text'>
-  <label for='number'>Contacts's number:</label>
-  <input id='number' name='number' type='text'>
-
-  <button type="submit">Add your contact!</button>
+<form action="/form1" method="post">
+  <label for='name'>Contact's name:</label>
+  <input id='name' name='name' class='form-control' type='text'>
+  <label for='cell'>Contact's cell number:</label>
+  <input id='cell' name='cell' class='form-control' type='text'>
+  <label for='work'>Contact's work number:</label>
+  <input id='work' name='work' class='form-control' type='text'>
+  <label for='pager'>Contact's pager number:</label>
+  <input id='pager' name='pager' class='form-control' type='text'>
+<p></p>
+  <button type="submit" class="btn btn-primary">Add your contact!</button>
 </form>
+</div>
 
+<div class = "col-md-6">
+
+<h4>Your Contact List:</h4>
 
 <ul>
   <% @contacts.each() do |contact| %>
-  <li><a href="/contacts/<%= contact.uid() %>"><%= contact.name() %></a></li>
+  <li><a href="/contact/<%= contact.name() %>"><%= contact.name() %></a></li>
   <% end %>
 </ul>
+
+</div>

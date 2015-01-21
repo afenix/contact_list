@@ -1,23 +1,49 @@
-<h1>Add additional phone numbers for <%= @contact.name() %> </h1>
 
-<form action="/new_numbers" method="post">
-  <input id='uid' name='uid' type='hidden' value='<%= @contact.uid() %>'>
+<p></p>
+<h3 class="text-left">Here is the additional information you provided for:</h3>
 
-  <label for='new_number'>Contact's new number:</label>
-  <input id='new_number' name='new_number' type='text'>
+<h3><strong><%= @name %> </strong></h3>
+<p></p>
 
-  <label for='type'>Please include what type of number this is (eg. Work, Home, Other):</label>
-  <input id='type' name='type' type='text'>
+  <h4>Cell phone number:</h4>
 
-  <button type="submit">Add new number</button>
-</form>
-
-<h3>Here are all the numbers for this contact:</h3>
-
-<ul>
-  <% @contacts.phone_numbers().each() do |contact| %>
-  <li><a href="/new_numbers/<%= contact.uid() %>"><%= contact.phone_number() %> <%= contact.type() %></a></li>
+   <% if Contact.find(@name).phone_numbers().cell() == "" %>
+     <form action = "/add_cell" method = "post">
+       <label for = "new_cell">Add cell phone number:</label>
+       <input id = "new_cell" name = "new_cell" type = "text">
+       <% Contact.set_this(@name) %>
+       <button type = "submit" class = "btn-primary">Add</button>
+    </form>
+  <% else %>
+    <p><%= Contact.find(@name).phone_numbers().cell() %></p>
   <% end %>
-</ul>
 
-<<a href="/">Return to Main Page</a>
+  <h4>Work phone number:</h4>
+
+  <% if Contact.find(@name).phone_numbers().work() == "" %>
+    <form action = "/add_work" method = "post">
+      <label for = "new_work">Add work phone number:</label>
+      <input id = "new_work" name = "new_work" type = "text">
+      <% Contact.set_this(@name) %>
+      <button type = "submit" class = "btn-primary">Add</button>
+    </form>
+  <% else %>
+    <p><%= Contact.find(@name).phone_numbers().work() %></p>
+  <% end %>
+
+  <h4>Pager phone number:</h4>
+
+  <% if Contact.find(@name).phone_numbers().pager() == "" %>
+    <form action = "/add_pager" method = "post">
+      <label for = "new_pager">Add new pager number:</label>
+      <input id = "new_pager" name = "new_pager" type = "text">
+      <% Contact.set_this(@name) %>
+      <button type = "submit" class = "btn-primary">Add</button>
+    </form>
+  <% else %>
+    <p><%= Contact.find(@name).phone_numbers().pager() %></p>
+  <% end %>
+
+  <form action = "/">
+    <button type = "submit" class = "btn-primary">Back to main page</button>
+  </form>
